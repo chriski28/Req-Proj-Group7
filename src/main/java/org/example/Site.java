@@ -11,7 +11,7 @@ import java.util.TreeMap;
 
 public class Site {
 
-    //helloh
+    //hellohh
 
     // Attributes representing the details of the charging site
     private String address;
