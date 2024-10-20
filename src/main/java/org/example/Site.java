@@ -30,7 +30,7 @@ public class Site {
             priceHistory.put(date, price);
         }
 
-        // Method to find the price at a specific date
+        // Method to find the price at a specific datej
         public double getPriceOnDate(LocalDateTime date) {
             // Use floorEntry to find the closest date before or equal to the given date
             Map.Entry<LocalDateTime, Double> entry = priceHistory.floorEntry(date);
