@@ -225,4 +225,23 @@ public class StepUser {
         }
 
 
+    @Given("a client with userId {string} exists")
+    public void aClientWithUserIdExists(String userId) {
+        currentClient = new User();  // Create a new User instance
+        currentClient.setUserId(userId);  // Set the userId
+        clientDatabase.add(currentClient);  // Add the client to the database
+    }
+
+    @When("the client requests to delete their account")
+    public void theClientRequestsToDeleteTheirAccount() {
+        // Logic to delete the client account
+        clientDatabase.remove(currentClient);  // Remove the client from the database
+        currentClient = null;  // Set currentClient to null to indicate the account has been deleted
+    }
+
+    @Then("the account should be deleted")
+    public void theAccountShouldBeDeleted() {
+        assertNull(currentClient, "The account was not deleted.");  // Check that currentClient is null
+        assertFalse(clientDatabase.contains(currentClient), "The client should not exist in the database.");  // Verify the client is no longer in the database
+    }
 }

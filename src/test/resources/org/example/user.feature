@@ -1,7 +1,7 @@
 Feature: Client Account and Charging Management
   In order to charge my electric vehicle at charging stations
   As a client
-  I want to create an account, top up my balance, and use a charger for charging sessions
+  I want to create an account, top up my balance, use a charger for charging sessions, and delete my account when needed
 
   # Scenarios for Creating a Client Account
 
@@ -50,3 +50,12 @@ Feature: Client Account and Charging Management
     Then the system should display a message "Insufficient balance to start charging"
     And the client's balance will stay at 0.00
     And the charger status will remain "Operational Free"
+
+     # Scenario for Account Deletion
+  Scenario: Successfully delete my account
+    Given a client with userId "10000000" exists
+    When the client requests to delete their account
+    Then the account should be deleted
+
+
+
