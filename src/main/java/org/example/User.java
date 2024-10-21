@@ -13,6 +13,7 @@ public class User {
     // Fields representing the attributes in the class diagram
     private String userId;
     private String name;
+
     private String username;
     private PaymentData paymentData; // Nested PaymentData class
     private double balance;
@@ -26,6 +27,17 @@ public class User {
         this.topUpList = new ArrayList<>(); // Initialize the top-up list
         this.invoiceItemList = new ArrayList<>(); // Initialize the invoice item list
     }
+    public User(String name, String username, String iban, String cardholderName) {
+        this.name = name;
+        this.username = username;
+        this.paymentData = new PaymentData(iban, cardholderName); // Initialize PaymentData with provided details
+        this.userId = generateUserId(); // Automatically generate a user ID
+        this.balance = 0.0; // Default starting balance
+        this.topUpList = new ArrayList<>(); // Initialize the top-up list
+        this.invoiceItemList = new ArrayList<>(); // Initialize the invoice item list
+    }
+
+
 
     // Method to generate a unique 8-digit user ID
     private String generateUserId() {
@@ -131,6 +143,12 @@ public class User {
 
     // Nested PaymentData class
     public class PaymentData {
+        public PaymentData(String iban, String cardholderName) {
+            this.iban = iban;
+            this.cardholderName = cardholderName;
+        }
+        public PaymentData(){};
+
         private String iban;
         private String cardholderName;
 

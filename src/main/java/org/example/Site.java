@@ -1,5 +1,4 @@
 package org.example;
-/*first edit*/
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -10,8 +9,6 @@ import java.util.TreeMap;
 //there was no connection between site and charger? Added a charger list in site and a site
 
 public class Site {
-
-    //aloha
 
     // Attributes representing the details of the charging site
     private String address;
@@ -33,7 +30,7 @@ public class Site {
             priceHistory.put(date, price);
         }
 
-        // Method to find the price at a specific date
+        // Method to find the price at a specific datej
         public double getPriceOnDate(LocalDateTime date) {
             // Use floorEntry to find the closest date before or equal to the given date
             Map.Entry<LocalDateTime, Double> entry = priceHistory.floorEntry(date);
@@ -130,4 +127,3 @@ public class Site {
                 '}';
     }
 }
-

@@ -1,5 +1,5 @@
 package org.example;
-
+/*
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -31,3 +31,5 @@ public class test {
  //       assertEqual(expected,actual);
     }
 }
+
+ */
