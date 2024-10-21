@@ -56,6 +56,3 @@ Feature: Client Account and Charging Management
     Given a client with userId "10000000" exists
     When the client requests to delete their account
     Then the account should be deleted
-
-
-

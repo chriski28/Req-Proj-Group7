@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -127,7 +128,7 @@ public class User {
 
     // Method to start a charging session
     public String charge(Charger charger, int durationMinutes, LocalDateTime date) {
-        InvoiceItem currentInvoiceItem = new InvoiceItem(this, charger, date, durationMinutes);
+        InvoiceItem currentInvoiceItem = new InvoiceItem(this,  date,charger, durationMinutes);
 
         // Calculate the total cost
         double totalCost = currentInvoiceItem.calculateInvoiceItemPrice();
@@ -146,6 +147,32 @@ public class User {
     public boolean hasSufficientBalance(double amount) {
         return this.balance >= amount;
     }
+    public void printTransactionHistory() {
+        // Combine both topUpList and invoiceItemList into a single list of Object type
+        List<Object> allTransactions = new ArrayList<>();
+        allTransactions.addAll(topUpList);
+        allTransactions.addAll(invoiceItemList);
+
+        // Sort the combined list by date
+        allTransactions.sort(Comparator.comparing(transaction -> {
+            if (transaction instanceof TopUpItem) {
+                return ((TopUpItem) transaction).getDate();
+            } else if (transaction instanceof InvoiceItem) {
+                return ((InvoiceItem) transaction).getDate();
+            }
+            return null;
+        }));
+
+        // Print the sorted transactions, distinguishing between TopUpItem and InvoiceItem
+        for (Object transaction : allTransactions) {
+            if (transaction instanceof TopUpItem) {
+                System.out.println(((TopUpItem) transaction).toString());
+            } else if (transaction instanceof InvoiceItem) {
+                System.out.println(((InvoiceItem) transaction).toString());
+            }
+        }
+    }
+
 
     // Nested PaymentData class
     public class PaymentData {

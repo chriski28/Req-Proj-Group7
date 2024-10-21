@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class InvoiceItem {
     private static int nextID = 10000000;
+    private final String type = "Invoice";
     private String invoiceID;
     private LocalDateTime date;
     private int duration; //measured in minutes
@@ -23,7 +24,7 @@ public class InvoiceItem {
 
     // Constructor; I put everything into the constructor but depending on how the feature is structured we probably
     // want a leaner constructor and assign all the other values via Setters
-    public InvoiceItem(User client, Charger charger, LocalDateTime date, int duration) {
+    public InvoiceItem(User client,  LocalDateTime date,Charger charger, int duration) {
         this.invoiceID = generateInvoiceItemID();
         this.date = date;
         this.client = client;
@@ -92,6 +93,10 @@ public class InvoiceItem {
         this.durationPrice = durationPrice;
     }
 
+    public String getType() {
+        return type;
+    }
+
 
     // Method to calculate the total price of the invoice
     public double calculateInvoiceItemPrice() {
@@ -102,7 +107,8 @@ public class InvoiceItem {
     @Override
     public String toString() {
         return "InvoiceItem{" +
-                "invoiceID=" + invoiceID +
+                "type=" + type +
+                ", invoiceID=" + invoiceID +
                 ", date=" + date.toString() +
                 ", client=" + client.getUserId() +
                 ", duration=" + duration + "minutes" +

@@ -3,6 +3,7 @@ package org.example;
 import java.time.LocalDateTime;
 
 public class TopUpItem {
+    private final String type = "TopUp";
 
     private double amount;
     private LocalDateTime date;
@@ -28,5 +29,18 @@ public class TopUpItem {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String toString() {
+        return "TopUpItem{" +
+                "type=" + type +
+                ", amount=" + amount +
+                ", date=" + date +
+                '}';
     }
 }
