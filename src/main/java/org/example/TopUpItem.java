@@ -1,16 +1,16 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TopUpItem {
 
     private double amount;
-    private LocalDate date;
+    private LocalDateTime date;
 
-    // Constructor
-    public TopUpItem(double amount) {
+    // Constructor that accepts both amount and date
+    public TopUpItem(double amount, LocalDateTime date) {
         this.amount = amount;
-        this.date = LocalDate.now(); // Set the date to today's date
+        this.date = date; // Set the date to the provided LocalDateTime
     }
 
     // Getters and Setters
@@ -22,11 +22,11 @@ public class TopUpItem {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

@@ -39,6 +39,12 @@ public class User {
 
 
 
+
+
+
+
+
+
     // Method to generate a unique 8-digit user ID
     private String generateUserId() {
         String newId = String.format("%08d", nextId); // Ensures the ID is always 8 digits

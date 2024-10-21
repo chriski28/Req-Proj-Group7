@@ -1,12 +1,16 @@
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.*;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.example.TopUpItem;
 import org.example.User;
+import io.cucumber.datatable.DataTable;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +18,7 @@ public class StepUser {
     private List<User> clientDatabase = new ArrayList<>();
     User currentClient;
     String errorMessage;
+    List<TopUpItem> topUpItems = new ArrayList<>();
 
     @When("the client provides the following details to create an account:")
     public void the_client_provides_the_following_details_to_create_an_account(DataTable dataTable) {
@@ -73,4 +78,41 @@ public class StepUser {
     public void theAccountShouldNotBeCreated() {
         assertFalse(clientDatabase.contains(currentClient), "Account should not be created in the database.");
     }
+    ///////////////////////Top Up Client/////////////////////////////////
+        @Given("a client exists with clientId {string} and an initial balance of {double}")
+        public void aClientExistsWithClientIdAndAnInitialBalanceOf(String clientId, Double initialBalance) {
+            currentClient = new User();
+            currentClient.setUserId(clientId);
+            currentClient.setBalance(initialBalance);
+        }
+
+        @When("the client tops up their account with {double} on {string}")
+        public void theClientTopsUpTheirAccountWithOn(Double amount, String date) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime topUpDate = LocalDateTime.parse(date, formatter);
+            TopUpItem topUpItem = new TopUpItem(amount, topUpDate);
+            currentClient.addTopUp(topUpItem);
+            topUpItems.add(topUpItem);
+        }
+
+        @Then("the client's balance should be {double}")
+        public void theClientSBalanceShouldBe(Double expectedBalance) {
+            assertEquals(expectedBalance, currentClient.getBalance(), "Client's balance is incorrect.");
+        }
+
+        @And("a TopUpItem should be created with the amount of {double}")
+        public void aTopUpItemShouldBeCreatedWithTheAmountOf(Double expectedAmount) {
+            TopUpItem lastTopUp = topUpItems.get(topUpItems.size() - 1);
+            assertEquals(expectedAmount, lastTopUp.getAmount(), "TopUp amount is incorrect.");
+        }
+
+        @And("the top-up date should be {string}")
+        public void theTopUpDateShouldBe(String expectedDate) {
+            TopUpItem lastTopUp = topUpItems.get(topUpItems.size() - 1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime parsedDate = LocalDateTime.parse(expectedDate, formatter);
+            assertEquals(parsedDate, lastTopUp.getDate(), "Top-up date is incorrect.");
+        }
+
+
 }

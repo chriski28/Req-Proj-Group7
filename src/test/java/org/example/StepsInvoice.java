@@ -1,5 +1,5 @@
 package org.example;
-/*
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -88,4 +88,3 @@ public class StepsInvoice {
     }
 }
 
- */
