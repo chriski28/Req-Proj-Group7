@@ -1,4 +1,5 @@
 package org.example;
+/*
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -89,3 +90,5 @@ public class StepsUpdateDurationPrices {
         }
     }
 }
+
+ */

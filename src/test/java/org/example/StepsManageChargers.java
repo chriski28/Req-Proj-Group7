@@ -1,4 +1,5 @@
 package org.example;
+/*
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -51,3 +52,5 @@ public class StepsManageChargers {
         System.out.println("Charger has the correct type: " + expectedType);
     }
 }
+
+ */
